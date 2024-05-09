@@ -1,5 +1,18 @@
 const UserModel = require('../models/userModel.js')
 
+const createUser = (req, res) => {
+    const userData = req.body
+    const newUser = new UserModel(userData)
+
+    newUser.save()
+        .then(() => {
+            res.status(201).json({ message: 'User added successfully' })
+        })
+        .catch(error => {
+            res.status(500).json({ message: 'Error adding user', error: error })
+        })
+}
+
 const getUsers = (req, res) => {
     UserModel
         .find()
@@ -11,4 +24,4 @@ const getUsers = (req, res) => {
         })
 }
 
-module.exports = { getUsers }
+module.exports = { createUser, getUsers }
