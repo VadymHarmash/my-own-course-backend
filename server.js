@@ -18,6 +18,7 @@ app.use((req, res, next) => {
 
 connectDB()
 
+app.post('/courses', courseController.createCourse)
 app.get('/courses', courseController.getCourses)
 app.post('/users', userController.createUser)
 app.get('/users', userController.getUsers)
