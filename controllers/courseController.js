@@ -24,4 +24,16 @@ const getCourses = (req, res) => {
         })
 }
 
-module.exports = { getCourses, createCourse }
+const deleteCourse = (req, res) => {
+    const courseId = req.params.id
+    CourseModel
+        .findByIdAndDelete(courseId)
+        .then(() => {
+            res.status(200).json({ message: 'Course deleted successfully' })
+        })
+        .catch((error) => {
+            res.status(500).json({ message: 'Error deleting course', error: error })
+        })
+}
+
+module.exports = { getCourses, createCourse, deleteCourse }
