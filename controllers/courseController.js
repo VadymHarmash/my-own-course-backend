@@ -13,6 +13,28 @@ const createCourse = (req, res) => {
         })
 }
 
+const editCourse = (req, res) => {
+    const { id } = req.params
+    const { paragraphs } = req.body
+    CourseModel
+        .findByIdAndUpdate(
+            id,
+            { paragraphs: paragraphs },
+            { new: true }
+        )
+        .then(updatedCourse => {
+            if (!updatedCourse) {
+                return res.status(404).json({ message: 'Course changing error' });
+            }
+            res.status(200).json(updatedCourse);
+        })
+        .catch(error => {
+            console.error('Error updating course:', error);
+            res.status(500).json({ message: 'Error updating course', error: error });
+        });
+};
+
+
 const getCourses = (req, res) => {
     CourseModel
         .find()
@@ -36,4 +58,4 @@ const deleteCourse = (req, res) => {
         })
 }
 
-module.exports = { getCourses, createCourse, deleteCourse }
+module.exports = { getCourses, createCourse, editCourse, deleteCourse }

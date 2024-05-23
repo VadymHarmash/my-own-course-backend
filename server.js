@@ -24,5 +24,6 @@ app.post('/users', userController.createUser)
 app.get('/users', userController.getUsers)
 app.post('/users/:userId/completedCourses', userController.addCompletedCourse)
 app.delete('/courses/:id', courseController.deleteCourse)
+app.post('/courses/:id/paragraphs', courseController.editCourse)
 
 app.listen(PORT, (err) => err ? console.log(err) : console.log(`Listening port ${PORT}`))
